@@ -13,23 +13,23 @@ type InputsProps = {
   parentOption?: string;
 };
 
-const getName = (parent: string, name: string) => `${parent ? parent + "." : ""}${name}`;
 
 const SettingsInputs = memo(
   ({ settings, register, parentOption = "" }: SharedProps & InputsProps) => {
     return (
       <>
         {Object.entries(settings).map(([name, val]) => {
+            const fullName = `${parentOption ? parentOption + "." : ""}${name}`;
           if (typeof val !== "object") {
             return (
               <div className={"field"} key={name}>
-                <Text bold>{getName(parentOption, name)}</Text>
-                <input defaultValue={val} name={getName(parentOption, name)} ref={register} />
+                <Text bold>{fullName}</Text>
+                <input defaultValue={val} name={fullName} ref={register} />
               </div>
             );
           } else
             return (
-              <SettingsInputs key={name} settings={val} parentOption={name} register={register} />
+              <SettingsInputs key={name} settings={val} parentOption={fullName} register={register} />
             );
         })}
         <style jsx>
@@ -65,7 +65,7 @@ const SettingsForm = ({
         </Text>
       </div>
       <SettingsInputs register={register} settings={settings} />
-      <Button onClick={handleSubmit((data) => setSettings(data))}>
+      <Button onClick={handleSubmit(setSettings)}>
         <Text type={"active"}>Update data</Text>
       </Button>
       <style jsx>
