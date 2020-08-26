@@ -1,2 +1,2 @@
 export * from "./Layout";
-export * from "./RobotsList";
+export * from "./robots/RobotsList";

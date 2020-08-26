@@ -1,14 +1,14 @@
-import { useQuery } from "@apollo/client";
 import React, { useState } from "react";
 
-import { GET_ROBOTS_QUERY } from "../../apollo/queries";
-import type { RobotsData } from "../../apollo/queries";
+import { api } from "../../apollo/api";
+import { RobotsOverviewData } from "../../apollo/queries";
 import withApollo from "../../apollo/withApollo";
 import { RobotsList } from "../../components";
 import { Layout } from "../../components";
-import { Pagination } from "../../components/Pagination";
+import { Pagination } from "../../components/robots/Pagination";
+import { Text } from "../../kit";
 
-const getRobotsByPage = (robots: RobotsData["robots"], currentPage: number) => {
+const getRobotsByPage = (robots: RobotsOverviewData["robots"], currentPage: number) => {
   const maxPageIdx = currentPage * 10;
   return new Array(10)
     .fill(undefined)
@@ -16,8 +16,8 @@ const getRobotsByPage = (robots: RobotsData["robots"], currentPage: number) => {
     .filter((a) => a);
 };
 
-export default withApollo(() => {
-  const { data, loading, error } = useQuery<RobotsData, {}>(GET_ROBOTS_QUERY);
+const RobotsPage = withApollo(() => {
+  const { data, loading, error } = api.getOverview();
   const [currentPage, setCurrentPage] = useState<number>(1);
   if (loading) return null;
   const { robots } = data!;
@@ -25,6 +25,7 @@ export default withApollo(() => {
   return (
     <Layout>
       <RobotsList className={"robots_list_wrapper"} robots={getRobotsByPage(robots, currentPage)} />
+      {error && <Text type={"error"}>{error}</Text>}
       <div className={"pagination_wrapper"}>
         <Pagination total={pagesOverall} current={currentPage} setCurrent={setCurrentPage} />
       </div>
@@ -45,3 +46,5 @@ export default withApollo(() => {
     </Layout>
   );
 });
+
+export default RobotsPage;

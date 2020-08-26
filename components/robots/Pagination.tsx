@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 
-import { Button } from "../kit";
+import { Button } from "../../kit";
 
 export const Pagination = ({
   total,

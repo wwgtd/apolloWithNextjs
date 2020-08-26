@@ -1,2 +1,1 @@
-export * from "./getRobots";
-export * from "./getRobot";
+export * from "./robots";

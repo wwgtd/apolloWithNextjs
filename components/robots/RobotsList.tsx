@@ -1,11 +1,17 @@
 import React from "react";
 
-import type { Robot } from "../apollo/queries";
-import { Link, RobotIcon, Text } from "../kit";
+import type { RobotOverview } from "../../apollo/queries";
+import { Link, RobotIcon, Text } from "../../kit";
 
 const urlToRobot = (id: string) => `/robots/robot/${id}`;
 
-export const RobotsList = ({ robots, className = "" }: { className?: string; robots: Robot[] }) => (
+export const RobotsList = ({
+  robots,
+  className = "",
+}: {
+  className?: string;
+  robots: RobotOverview[];
+}) => (
   <div className={`robot_list ${className}`}>
     {robots.map((i) => (
       <Link key={i.id} to={urlToRobot(i.id)}>
@@ -15,7 +21,7 @@ export const RobotsList = ({ robots, className = "" }: { className?: string; rob
               <RobotIcon />
             </div>
             {Object.entries(i)
-              .filter(([name]) => name.indexOf("_") === -1)
+              .filter(([name]) => name.indexOf("__") === -1)
               .map(([name, val]) => (
                 <div key={name} className={"robot_info_item"}>
                   <div className={"robot_info_item_name"}>
