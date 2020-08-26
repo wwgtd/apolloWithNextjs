@@ -21,7 +21,7 @@ const Settings = ({ settings }: { settings: Robot["settings"] }) => (
         return (
           <React.Fragment key={name}>
             <Text size={"l"} bold>
-              {name}
+              {name}:
             </Text>
             <Settings settings={val} />
           </React.Fragment>

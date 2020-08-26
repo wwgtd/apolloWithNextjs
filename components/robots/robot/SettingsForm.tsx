@@ -23,7 +23,7 @@ const SettingsInputs = memo(
           if (typeof val !== "object") {
             return (
               <div className={"field"} key={name}>
-                <Text bold>{`${parentOption ? parentOption + "." : ""}${name}`}</Text>
+                <Text bold>{getName(parentOption, name)}</Text>
                 <input defaultValue={val} name={getName(parentOption, name)} ref={register} />
               </div>
             );
@@ -38,6 +38,11 @@ const SettingsInputs = memo(
               display: flex;
               flex-flow: column;
               padding: 15px 0;
+            }
+
+            .field > input {
+              margin: 5px 0;
+              padding: 3px;
             }
           `}
         </style>
