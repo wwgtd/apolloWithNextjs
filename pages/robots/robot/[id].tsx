@@ -27,8 +27,11 @@ export default withApollo(() => {
         <RobotInfo code={data!.code} id={data!.id} settings={settings!} />
         <SettingsInputs settings={settings!} setSettings={setSettings} />
         <style jsx>{`
-          display: flex;
-          justify-content: space-between;
+          .robot-page {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+          }
         `}</style>
       </div>
     </Layout>

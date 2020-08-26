@@ -82,7 +82,13 @@ const RobotInfo = ({
         .column {
           display: flex;
           flex-flow: column;
-          width: 50%;
+        }
+
+        .robot-info {
+          min-width: 300px;
+          width: 40%;
+
+          margin: 0 auto;
         }
       `}
     </style>

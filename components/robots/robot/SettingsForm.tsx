@@ -54,17 +54,28 @@ const SettingsForm = ({
 
   return (
     <div className={"settings-form"}>
+      <div className={"form-label"}>
+        <Text size={"l"} bold>
+          Change values
+        </Text>
+      </div>
       <SettingsInputs register={register} settings={settings} />
       <Button onClick={handleSubmit((data) => setSettings(data))}>
         <Text type={"active"}>Update data</Text>
       </Button>
       <style jsx>
         {`
+          .form-label {
+            text-align: center;
+            padding: 20px 0;
+          }
           .settings-form {
-            width: 50%;
             padding: 40px;
             display: flex;
             flex-flow: column;
+            min-width: 300px;
+            width: 40%;
+            margin: 0 auto;
           }
         `}
       </style>
